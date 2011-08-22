@@ -30,16 +30,17 @@ import java.util.Map;
  */
 public class ConfigurationUtil
 {
-   public static Map<String, MachineEventListener> getListeners(MachineConfiguration config)
+   public static <C, A> Map<String, MachineEventListener<C, A>> getListeners(MachineConfiguration config)
    {
-      Map<String, MachineEventListener> listenerMap = new HashMap<String, MachineEventListener>();
+      Map<String, MachineEventListener<C, A>> listenerMap = new HashMap<String, MachineEventListener<C, A>>();
 
       for(ListenerConfig listenerConfig : config.listeners())
       {
-         try{
+         try
+         {
             String id = listenerConfig.id();
             Class<MachineEventListener> clazz = listenerConfig.type();
-            MachineEventListener listener = clazz.newInstance();
+            MachineEventListener<C, A> listener = (MachineEventListener<C, A>)clazz.newInstance();
             listenerMap.put(id, listener);
          }
          catch(Exception ex)

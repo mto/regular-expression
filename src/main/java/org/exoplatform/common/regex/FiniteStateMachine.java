@@ -114,7 +114,7 @@ public abstract class FiniteStateMachine<C, A>
       MachineConfiguration config = this.getClass().getAnnotation(MachineConfiguration.class);
       if(config != null)
       {
-         this.listenerMap = (Map<String, MachineEventListener<C, A>>)ConfigurationUtil.getListeners(config);
+         this.listenerMap = ConfigurationUtil.getListeners(config);
       }
    }
 }
